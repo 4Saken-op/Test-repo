@@ -2,14 +2,6 @@ import RideCard, { type Ride } from "./components/RideCard";
 
 const rides: Ride[] = [
   {
-    id: 1,
-    driver: "Alice",
-    from: "Downtown",
-    to: "Tech Park",
-    seats: 2,
-    time: "9:00 AM",
-  },
-  {
     id: 2,
     driver: "Bob",
     from: "City Mall",
@@ -31,7 +23,7 @@ export default function App() {
   return (
     <div className="min-h-screen bg-gray-100 p-6 font-sans">
       <h1 className="text-4xl font-bold text-center text-blue-700 mb-8">
-        🚗 Carpool App
+        🚗 Carpooling App
       </h1>
 
       <div className="max-w-3xl mx-auto grid gap-6">
