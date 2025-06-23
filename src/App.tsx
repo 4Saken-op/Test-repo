@@ -3,14 +3,6 @@ import RideCard from "./components/RideCard";
 import Sidebar from "./components/Sidebar";
 const rides: Ride[] = [
   {
-    id: 1,
-    driver: "Alice",
-    from: "Downtown",
-    to: "Tech Park",
-    seats: 2,
-    time: "9:00 AM",
-  },
-  {
     id: 2,
     driver: "Bob",
     from: "City Mall",
