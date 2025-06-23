@@ -1,5 +1,6 @@
-import RideCard, { type Ride } from "./components/RideCard";
-
+import type { Ride } from "./components/RideCard";
+import RideCard from "./components/RideCard";
+import Sidebar from "./components/Sidebar";
 const rides: Ride[] = [
   {
     id: 2,
@@ -21,16 +22,19 @@ const rides: Ride[] = [
 
 export default function App() {
   return (
-    <div className="min-h-screen bg-gray-100 p-6 font-sans">
-      <h1 className="text-4xl font-bold text-center text-blue-700 mb-8">
-        🚗 Carpooling App
-      </h1>
+    <div className="flex min-h-screen bg-gray-100">
+      <Sidebar />
+      <main className="flex-1 p-6 overflow-auto">
+        <h1 className="text-3xl font-bold text-blue-700 mb-6">
+          Available Rides
+        </h1>
 
-      <div className="max-w-3xl mx-auto grid gap-6">
-        {rides.map((ride) => (
-          <RideCard key={ride.id} ride={ride} />
-        ))}
-      </div>
+        <div className="grid gap-6 max-w-4xl">
+          {rides.map((ride) => (
+            <RideCard key={ride.id} ride={ride} />
+          ))}
+        </div>
+      </main>
     </div>
   );
 }
