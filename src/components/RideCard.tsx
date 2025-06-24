@@ -1,17 +1,7 @@
-export type Ride = {
-  id: number;
-  driver: string;
-  from: string;
-  to: string;
-  seats: number;
-  time: string;
-};
+import { Link } from "react-router-dom";
+import type { Ride } from "../data/rides";
 
-type RideCardProps = {
-  ride: Ride;
-};
-
-function RideCard({ ride }: RideCardProps) {
+export default function RideCard({ ride }: { ride: Ride }) {
   return (
     <div className="bg-white shadow-md rounded-xl p-6 border border-gray-200">
       <h2 className="text-2xl font-semibold text-gray-800 mb-2">
@@ -27,12 +17,15 @@ function RideCard({ ride }: RideCardProps) {
         <strong>Time:</strong> {ride.time}
       </p>
       <p className="text-gray-600 mb-4">
-        <strong>Available Seats:</strong> {ride.seats}
+        <strong>Seats:</strong> {ride.seats}
       </p>
-      <button className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition">
+
+      <Link
+        to={`/booking/${ride.id}`}
+        className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition"
+      >
         Request Ride
-      </button>
+      </Link>
     </div>
   );
 }
-export default RideCard;
