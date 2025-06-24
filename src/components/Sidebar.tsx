@@ -18,6 +18,12 @@ export default function Sidebar() {
         >
           Profile
         </Link>
+        <Link
+          to="/my-bookings"
+          className="block px-4 py-2 rounded hover:bg-blue-700 transition"
+        >
+          My Bookings
+        </Link>
       </nav>
     </div>
   );
