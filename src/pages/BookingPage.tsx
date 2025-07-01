@@ -1,22 +1,33 @@
 import { useParams, useNavigate } from "react-router-dom";
-import { rides } from "../data/rides";
-import { currentUser } from "../data/users";
+import { getAllRidesQuery } from "../queries/getAllRidesQuery";
+import { toast } from "react-toastify";
+import { useBookRide } from "../queries/updateBookings";
 
 export default function BookingPage() {
+  const { data: rides = [] } = getAllRidesQuery();
   const { id } = useParams();
   const navigate = useNavigate();
-  const ride = rides.find((r) => r.id === Number(id));
+  const currentUserId = 1; // 🔁 Replace with real user logic if needed
+
+  const ride = rides.find((r) => Number(r.id) === Number(id));
+  const { mutate, isPending } = useBookRide();
 
   if (!ride) return <p className="p-6">Ride not found.</p>;
 
   const handleConfirm = () => {
-    // Save to bookings (could be localStorage or backend in real app)
-    const bookings = JSON.parse(localStorage.getItem("bookings") || "[]");
-    bookings.push({ ...ride, user: currentUser.name });
-    localStorage.setItem("bookings", JSON.stringify(bookings));
-
-    alert("✅ Booking confirmed!");
-    navigate("/my-bookings");
+    mutate(
+      { userId: currentUserId, rideId: ride.id },
+      {
+        onSuccess: () => {
+          toast.success("✅ Booking confirmed!");
+          navigate(`/my-bookings/${currentUserId}`);
+        },
+        onError: (error) => {
+          console.error("Booking failed:", error);
+          toast.error("❌ Booking failed. Please try again.");
+        },
+      }
+    );
   };
 
   return (
@@ -43,9 +54,10 @@ export default function BookingPage() {
 
         <button
           onClick={handleConfirm}
+          disabled={isPending}
           className="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700 w-full"
         >
-          ✅ Confirm Booking
+          {isPending ? "Booking..." : "✅ Confirm Booking"}
         </button>
       </div>
     </div>

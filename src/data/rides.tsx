@@ -7,7 +7,7 @@ export type Ride = {
   time: string;
 };
 
-export const rides: Ride[] = [
+export const rides_old: Ride[] = [
   {
     id: 1,
     driver: "Alice",

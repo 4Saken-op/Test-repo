@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { currentUser } from "../data/users";
 
 export default function Sidebar() {
   return (
@@ -13,13 +14,13 @@ export default function Sidebar() {
           Home
         </Link>
         <Link
-          to="/profile"
+          to={"/profile/" + currentUser.id}
           className="block px-4 py-2 rounded hover:bg-blue-700 transition"
         >
           Profile
         </Link>
         <Link
-          to="/my-bookings"
+          to={"/my-bookings/" + currentUser.id}
           className="block px-4 py-2 rounded hover:bg-blue-700 transition"
         >
           My Bookings
