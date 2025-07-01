@@ -14,9 +14,9 @@ export default function ProfilePage() {
         <p className="mb-4">
           <strong>Joined:</strong> {currentUser.joined}
         </p>
-        <button className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">
-          Edit Profile
-        </button>
+        <p className="mb-4">
+          <strong>Bookings:</strong> {currentUser.bookings.length}
+        </p>
       </div>
     </div>
   );
