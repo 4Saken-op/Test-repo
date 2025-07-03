@@ -10,8 +10,10 @@ const getRides = async (): Promise<Ride[]> => {
 };
 
 export const getAllRidesQuery = () => {
-  return useQuery<Ride[]>({
+  const { data: rides = [], isLoading } = useQuery<Ride[]>({
     queryKey: ["rides"],
     queryFn: getRides,
+    staleTime: 1000 * 60 * 5, // 5 minutes
   });
+  return { rides, isLoadingRides: isLoading };
 };

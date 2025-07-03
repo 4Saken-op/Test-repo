@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import type { Ride } from "../data/rides";
+import type { Ride } from "../types/ride_type";
 
 export default function RideCard({ ride }: { ride: Ride }) {
   return (
@@ -7,6 +7,9 @@ export default function RideCard({ ride }: { ride: Ride }) {
       <h2 className="text-2xl font-semibold text-gray-800 mb-2">
         Ride with {ride.driver}
       </h2>
+      <p className="text-gray-600 mb-1">
+        <strong>ID:</strong> {ride.id}
+      </p>
       <p className="text-gray-600 mb-1">
         <strong>From:</strong> {ride.from}
       </p>
@@ -21,7 +24,7 @@ export default function RideCard({ ride }: { ride: Ride }) {
       </p>
 
       <Link
-        to={`/booking/${ride.id}`}
+        to={`/booking/${ride.id}?`}
         className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition"
       >
         Request Ride

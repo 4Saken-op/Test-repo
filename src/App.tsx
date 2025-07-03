@@ -3,11 +3,12 @@ import RideCard from "./components/RideCard";
 import Sidebar from "./components/Sidebar";
 import { getAllRidesQuery } from "./queries/getAllRidesQuery";
 import Spinner from "./components/Spinner";
+import { getUserById } from "./queries/getUserByIdQuery";
+import { currentUser } from "./data/users";
 
 export default function App() {
-  // Fetch rides using the custom query hook
-  // This hook uses React Query to fetch data from the API
-  const { data: rides = [], isLoading } = getAllRidesQuery();
+  const { rides = [], isLoadingRides } = getAllRidesQuery();
+  const {} = getUserById(currentUser.id);
 
   const [selectedFrom, setSelectedFrom] = useState("");
   const [selectedTo, setSelectedTo] = useState("");
@@ -18,7 +19,8 @@ export default function App() {
   const filteredRides = rides.filter((ride) => {
     return (
       (selectedFrom === "" || ride.from === selectedFrom) &&
-      (selectedTo === "" || ride.to === selectedTo)
+      (selectedTo === "" || ride.to === selectedTo) &&
+      ride.seats > 0
     );
   });
 
@@ -62,7 +64,7 @@ export default function App() {
 
           {/* Ride Cards */}
           <div className="grid gap-6 max-w-4xl">
-            {isLoading ? (
+            {isLoadingRides ? (
               <Spinner />
             ) : filteredRides.length > 0 ? (
               filteredRides.map((ride) => (

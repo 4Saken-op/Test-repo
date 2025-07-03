@@ -1,41 +1,38 @@
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
+import type { Ride } from "../types/ride_type";
+import type { Users } from "../types/user_type";
 
-type Ride = {
-  id: number;
-  driver: string;
-  from: string;
-  to: string;
-  time: string;
-  seats: number;
-};
+export const getUserBookingsQuery = (userId: string) => {
+  const queryClient = useQueryClient();
 
-const getUserBookings = async (userId: number): Promise<Ride[]> => {
-  // Step 1: Get user
-  const userRes = await fetch(`http://localhost:3001/users/${userId}`);
-  if (!userRes.ok) {
-    throw new Error("Failed to fetch user data");
-  }
-  const user = await userRes.json();
-
-  const bookingIds: number[] = user.bookings || [];
-
-  // Step 2: Get each ride info
-  const ridePromises = bookingIds.map((rideId) =>
-    fetch(`http://localhost:3001/rides/${rideId}`).then((res) => {
-      if (!res.ok) {
-        throw new Error(`Failed to fetch ride with id ${rideId}`);
-      }
-      return res.json();
-    })
-  );
-
-  // Step 3: Return all resolved rides
-  return Promise.all(ridePromises);
-};
-
-export const getUserBookingsQuery = (userId: number) => {
   return useQuery<Ride[]>({
     queryKey: ["user-bookings", userId],
-    queryFn: () => getUserBookings(userId),
+    queryFn: async () => {
+      const user: Users | undefined = queryClient.getQueryData([
+        "users",
+        userId,
+      ]);
+      console.log("🚀 ~ Cached user:", user);
+
+      const bookingIds: string[] = user?.bookings || [];
+      console.log("🚀 ~ queryFn: ~ bookingIds:", bookingIds);
+
+      const allRides = queryClient.getQueryData<Ride[]>(["rides"]);
+      console.log("🚀 ~ Cached rides:", allRides);
+
+      if (!allRides) {
+        console.log(
+          "🚀 ~ queryFn: ~ No cached rides found, returning empty array"
+        );
+        return [];
+      }
+      const filterRides = allRides.filter((ride) =>
+        bookingIds.includes(ride.id)
+      );
+      console.log("🚀 ~ queryFn: ~ filterRides:", filterRides);
+
+      return filterRides;
+    },
+    staleTime: 1000 * 60 * 5, // 5 minutes
   });
 };
