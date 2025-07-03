@@ -5,7 +5,7 @@
       "driver": "Alice",
       "from": "Downtown",
       "to": "Tech Park",
-      "seats": 2,
+      "seats": 1,
       "time": "9:00 AM"
     },
     {
@@ -21,7 +21,7 @@
       "driver": "Charlie",
       "from": "Airport",
       "to": "City Center",
-      "seats": 1,
+      "seats": 17,
       "time": "10:15 AM"
     },
     {
@@ -29,7 +29,7 @@
       "driver": "Dana",
       "from": "Suburb Station",
       "to": "Downtown",
-      "seats": 4,
+      "seats": 1,
       "time": "7:45 AM"
     },
     {
@@ -37,7 +37,7 @@
       "driver": "Evan",
       "from": "City Center",
       "to": "Tech Park",
-      "seats": 2,
+      "seats": 6,
       "time": "11:00 AM"
     },
     {
@@ -45,7 +45,7 @@
       "driver": "Fiona",
       "from": "Hilltop",
       "to": "University",
-      "seats": 3,
+      "seats": 5,
       "time": "8:00 AM"
     },
     {
@@ -53,7 +53,7 @@
       "driver": "George",
       "from": "Lakeview",
       "to": "Airport",
-      "seats": 2,
+      "seats": 4,
       "time": "9:30 AM"
     },
     {
@@ -61,7 +61,7 @@
       "driver": "Hannah",
       "from": "Old Town",
       "to": "Downtown",
-      "seats": 1,
+      "seats": 12,
       "time": "7:00 AM"
     },
     {
@@ -69,7 +69,7 @@
       "driver": "Ian",
       "from": "Train Station",
       "to": "Tech Park",
-      "seats": 4,
+      "seats": 11,
       "time": "8:15 AM"
     },
     {
@@ -77,7 +77,7 @@
       "driver": "Jane",
       "from": "Suburb Station",
       "to": "City Mall",
-      "seats": 3,
+      "seats": 7,
       "time": "10:45 AM"
     }
   ],
@@ -86,9 +86,13 @@
       "id": "1",
       "name": "Erwin Jose",
       "email": "erwin@example.com",
+      "joined": "Jan 2025",
       "bookings": [
         "1",
-        "9",
+        "2",
+        "3",
+        "4",
+        "5",
         "7"
       ]
     },
@@ -96,12 +100,14 @@
       "id": "2",
       "name": "John Doe",
       "email": "john@example.com",
+      "joined": "Jan 2025",
       "bookings": []
     },
     {
       "id": "3",
       "name": "Jane Smith",
       "email": "jane@example.com",
+      "joined": "Jan 2025",
       "bookings": []
     }
   ]

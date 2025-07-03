@@ -1,5 +1,5 @@
 export type Ride = {
-  id: number;
+  id: string;
   driver: string;
   from: string;
   to: string;

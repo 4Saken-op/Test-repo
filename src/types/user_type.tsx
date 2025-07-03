@@ -1,7 +1,7 @@
 export type Users = {
-  id: number;
+  id: string;
   name: string;
   email: string;
   joined: string;
-  bookings: number[];
+  bookings: string[];
 };

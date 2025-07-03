@@ -1,9 +1,23 @@
+import { useQueryClient } from "@tanstack/react-query";
 import Sidebar from "../components/Sidebar";
 import { currentUser } from "../data/users";
-import { getUserBookingsQuery } from "../queries/getUserBookings";
+import type { Users } from "../types/user_type";
+import type { Ride } from "../types/ride_type";
 
 export default function MyBookings() {
-  const bookings = getUserBookingsQuery(currentUser.id).data || [];
+  const queryClient = useQueryClient();
+  const userId = currentUser.id;
+  const user: Users | undefined = queryClient.getQueryData(["users", userId]);
+  console.log("🚀 ~ Cached user:", user);
+
+  const bookingIds: string[] = user?.bookings || [];
+  console.log("🚀 ~ queryFn: ~ bookingIds:", bookingIds);
+
+  const allRides = queryClient.getQueryData<Ride[]>(["rides"]) || [];
+  console.log("🚀 ~ Cached rides:", allRides);
+
+  // const bookings = getUserBookingsQuery(currentUser.id).data || [];
+  const bookings = allRides.filter((ride) => bookingIds.includes(ride.id));
   console.log("🚀 ~ MyBookings ~ Recieved bookings:", bookings);
 
   if (bookings.length === 0) {
